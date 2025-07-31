@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: palevioletred;
+      padding: 10px 20px;
+      color: white;
+    }
+
+    .nav-left,
+    .nav-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .dropdown {
+      position: relative;
+      margin-right: 15px;
+    }
+
+    .dropbtn {
+      background-color: palevioletred;
+      color: white;
+      padding: 10px 16px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: white;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: #333;
+      padding: 10px 14px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #ddd;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .search-input {
+      padding: 8px;
+      border: none;
+      border-radius: 4px;
+      margin-right: 8px;
+    }
+
+    .search-btn,
+    .logout-btn {
+      background-color: white;
+      color: palevioletred;
+      border: 1px solid palevioletred;
+      padding: 8px 14px;
+      margin-left: 5px;
+      cursor: pointer;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .search-btn:hover,
+    .logout-btn:hover {
+      background-color: palevioletred;
+      color: white;
+    }
+  </style>
+</head>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<center>{{message}}</center>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<body>
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="dropdown">
+        <button class="dropbtn">Notes</button>
+        <div class="dropdown-content">
+          <a href="{{url_for('addnotes')}}">Add Notes</a>
+          <!-- <a href="#">Add Notes</a> -->
+          <a href="{{url_for('viewallnotes')}}">View All Notes</a>
+          <a href="{{url_for('getexceldata')}}">Excel Data</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Files</button>
+        <div class="dropdown-content">
+          <a href="{{url_for('fileupload')}}">File Upload</a>
+          <a href="{{url_for('viewallfiles')}}">View All Files</a>
+        </div>
+      </div>
+    </div>
+    {{session.get('user')}}
+    <form method="post" action="{{url_for('search')}}">
+      <div class="nav-right">
+        <input type="text" name="searchdata" placeholder="Search..." class="search-input" />
+        <button class="search-btn">Search</button>
+
+      </div>
+    </form>
+    <a href="{{url_for('userlogout')}}"><button class="logout-btn">Logout</button></a>
+  </nav>
+  {% block content %}{% endblock %}
+  {% if matcheddata %}
+  <table>
+    <thead>
+      <tr>
+        <th>Notes_ID</th>
+        <th>Title</th>
+        <th>Created_at</th>
+        <th>Links</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for i in matcheddata %}
+      <tr>
+        <td>{{i[0]}}</td>
+        <td>{{i[1]}}</td>
+        <td>{{i[3]}}</td>
+        <td><a href="{{url_for('viewnotes',nid=i[0])}}">View</a>
+          <a href="{{url_for('updatenotes',nid=i[0])}}">Update</a>
+          <a href="{{url_for('deletenotes',nid=i[0])}}">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</body>
+
+</html>

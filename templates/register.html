@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color: bisque;
+        }
+        div{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 200px;
+            color: violet;
+            
+        }
+        input{
+            width: 125px;
+        }
+    </style>
+</head>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for messages in messages %}
+        <center>{{messages}}</center>
+      {% endfor %}
+    {% endif %}
+{% endwith %}
+<body>
+    <div>
+        <center>
+        <h1>REGISTER FORM</h1>
+        <form method="post">
+        Enter Username:<br><input type="text" name="username" placeholder="Bindu"><br>
+        Enter Email Id:<br><input type="email" name="email" placeholder="email"><br>
+        Enter Gender:<br><input type="text" name="gender" placeholder="gender"><br>
+        Enter Password:<br><input type="password" name="pwd" placeholder="password"><br> 
+        <button style="width: 100px; margin-top: 15px;">submit</button>
+        </center>
+         </form>
+    </div>
+   
+</body>
+</html>

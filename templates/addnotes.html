@@ -1,0 +1,29 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+<style>
+    .d{
+        border:2px double blue;
+        border-radius:10px;
+        margin-top: 2%;
+        margin-left: 32%;
+        margin-right: 32%;
+        padding: 10px;
+        background-color:palevioletred;
+    }
+</style>
+</head>
+<body>
+<center>
+    <div class="d">
+        <form method="POST" action="{{ url_for('addnotes') }}">
+            <label for="">Enter Title</label><br>
+            <input type="text" name="title" required><br>
+            <label for="">Description</label><br>
+            <input type="text" name="description" required><br><br>
+            <button type="submit">Submit</button><br>
+            </form>
+        </div>
+    <!-- </div> -->
+</center>
+
+{% endblock %}

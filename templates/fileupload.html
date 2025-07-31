@@ -1,0 +1,112 @@
+{% extends 'dashboard.html' %}
+{% block content %}
+    <style>
+        /* .d {
+            border: 2px double black;
+            border-radius: 10px;
+            margin-left: 33%;
+            margin-right: 33%;
+            margin-top: 3%;
+
+        } */
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: palevioletred;
+            padding: 10px 20px;
+            color: white;
+        }
+
+        .nav-left,
+        .nav-right {
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            margin-right: 15px;
+        }
+
+        .dropbtn {
+            background-color: palevioletred;
+            color: white;
+            padding: 10px 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: #333;
+            padding: 10px 14px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .search-input {
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            margin-right: 8px;
+        }
+
+        .search-btn,
+        .logout-btn {
+            background-color: white;
+            color: palevioletred;
+            border: 1px solid palevioletred;
+            padding: 8px 14px;
+            margin-left: 5px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .search-btn:hover,
+        .logout-btn:hover {
+            background-color: palevioletred;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <div class="d">
+            <form action="{{url_for('fileupload')}}"method="post" enctype="multipart/form-data">
+                <label for="fileInput">Choose a file: </label><br><br>
+                <input type="file" id="fileInput" name="file" required>
+                <button type="submit">Submit</button><br>
+            </form>
+        </div>
+    </center>
+{% endblock %}
+</body>
+
+</html>
